@@ -6,12 +6,18 @@ use BasePhp\Http\Response;
 
 class Config
 {
-    public function getConfig(string $configName): array
+    public static function getConfig(string $configName, string $key = ''): array
     {
+        $config = [];
+
         if (file_exists(__DIR__ . '/../../../config/' . $configName . '.php')) {
-            return include __DIR__ . '/../../../config/' . $configName . '.php';
+            $config = include __DIR__ . '/../../../config/' . $configName . '.php';
         }
 
-        return [];
+        if ($key) {
+            return $config[$key];
+        }
+
+        return $config;
     }
 }

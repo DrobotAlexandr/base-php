@@ -3,32 +3,19 @@
 
 namespace App\Services\Users;
 
+use App\Models\Users\User;
+
 class UsersService
 {
 
     public static function getUsers(): array
     {
-        $users = [];
-
-        $users[] = [
-            'id' => 1,
-            'name' => 'Jon'
-        ];
-
-        $users[] = [
-            'id' => 2,
-            'name' => 'Alex'
-        ];
-
-        return $users;
+        return User::getUsers();
     }
 
     public static function getUser(): array
     {
-        return [
-            'id' => 1,
-            'name' => 'Jon'
-        ];
+        return User::getUser(1);
     }
 
 }

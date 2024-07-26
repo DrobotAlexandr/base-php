@@ -6,6 +6,9 @@ class Response
 {
     public static function json(array $data): void
     {
+        if (!isset($data['status'])) {
+            $data['status'] = 'ok';
+        }
 
         $data['version'] = self::json__getVersion($data);
 
