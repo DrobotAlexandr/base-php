@@ -15,6 +15,7 @@ class Api
 
         if ($endpointPath = self::getEndpointFilePath(self::getUrl($url))) {
 
+            self::includeCORS($endpointPath);
             self::includeGuard($endpointPath);
 
             include $endpointPath;
@@ -25,6 +26,19 @@ class Api
 
         }
 
+    }
+
+    private static function includeCORS(string $endpointPath): void
+    {
+        $directory = '';
+
+        foreach (explode('/', $endpointPath) as $dir) {
+            $directory .= $dir . '/';
+
+            if (file_exists($directory . '/_cors.php')) {
+                include_once $directory . '/_cors.php';
+            }
+        }
     }
 
     private static function includeGuard(string $endpointPath): void
