@@ -1,8 +1,22 @@
 <?php
 
-function dd($data): void
+function dd(): void
 {
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
+    echo "<pre style='background: #253139; color: #fff; font-size: 16px; cursor: default; padding: 16px; border-radius: 4px; width: fit-content; min-width: 700px;'>";
+
+    $args = func_get_args();
+    $numArgs = func_num_args();
+
+    for ($i = 0; $i < $numArgs; $i++) {
+        print_r($args[$i]);
+
+        if (isset($args[$i + 1])) {
+            echo '<br/>';
+            echo '-------------------------------------------------------------------------------';
+            echo '<br/>';
+        }
+    }
+
+    echo "</pre>";
+    exit();
 }

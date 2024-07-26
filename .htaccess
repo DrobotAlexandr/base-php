@@ -5,3 +5,18 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ base/base.php [L,QSA]
 
 Options -Indexes
+
+<FilesMatch "\.sql$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.php$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+<Files "base.php">
+    Order Allow,Deny
+    Allow from all
+</Files>

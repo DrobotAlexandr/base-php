@@ -13,11 +13,11 @@ class Api
             return;
         }
 
-        if ($endpointPath = self::getEndpointFilePath($url)) {
+        if ($endpointPath = self::getEndpointFilePath(self::getUrl($url))) {
 
-            Response::json(
-                include $endpointPath
-            );
+            self::includeGuard($endpointPath);
+
+            include $endpointPath;
 
         } else {
 
@@ -25,6 +25,19 @@ class Api
 
         }
 
+    }
+
+    private static function includeGuard(string $endpointPath): void
+    {
+        $directory = '';
+
+        foreach (explode('/', $endpointPath) as $dir) {
+            $directory .= $dir . '/';
+
+            if (file_exists($directory . '/_guard.php')) {
+                include_once $directory . '/_guard.php';
+            }
+        }
     }
 
     private static function getUrl(string $url, int $part = 0): string
@@ -40,12 +53,19 @@ class Api
 
     private static function getEndpointFilePath(string $url): string
     {
-        $endpointPath = __DIR__ . '/../../../interaction/' . $url . '.php';
+        $endpointPath = __DIR__ . '/../../../interaction/' . rtrim($url, '/') . '.php';
 
         if (!file_exists($endpointPath)) {
             return '';
         }
 
         return $endpointPath;
+    }
+
+    public static function runMethod($callback): void
+    {
+        Response::json(
+            $callback()
+        );
     }
 }

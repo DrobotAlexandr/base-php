@@ -16,7 +16,7 @@ class Loader
             return;
         }
 
-        $classPath = __DIR__ . '/../app/' . strtr($className, ['\\' => '/', 'App\\' => '']) . '.php';
+        $classPath = __DIR__ . '/../../../app/' . strtr($className, ['\\' => '/', 'App\\' => '']) . '.php';
 
         if (file_exists($classPath) and !class_exists($className)) {
             require $classPath;
