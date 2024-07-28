@@ -6,7 +6,7 @@ use BasePhp\Http\Response;
 
 class Config
 {
-    public static function getConfig(string $configName, string $key = ''): array
+    public static function getConfig(string $configName, string $key = ''): array|string
     {
         $config = [];
 

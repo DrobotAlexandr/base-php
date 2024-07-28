@@ -23,7 +23,7 @@ class Request
             }
         }
 
-        $payLoad = (array)file_get_contents('php://input');
+        $payLoad = (array)json_decode(file_get_contents('php://input'));
 
         if ($payLoad[$key]) {
             if (is_array($payLoad[$key])) {
@@ -32,6 +32,8 @@ class Request
                 return htmlspecialchars($payLoad[$key]);
             }
         }
+
+        return '';
 
     }
 

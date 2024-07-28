@@ -32,5 +32,14 @@ class Response
 
     }
 
+    public static function error(string $error = 'Error', string $errorCode = ''): array
+    {
+        return [
+            'status' => 'error',
+            'errorCode' => $errorCode,
+            'errorMessage' => $error
+        ];
+    }
+
 
 }
